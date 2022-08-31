@@ -1,5 +1,6 @@
 package com.example.happiewatch.api;
 
+import com.example.happiewatch.api.vm.DashboardVM;
 import com.example.happiewatch.dto.OderDto;
 import com.example.happiewatch.entity.OderEntity;
 import com.example.happiewatch.service.IOderService;
@@ -32,5 +33,20 @@ public class ApiOder {
     @DeleteMapping(value = "/delete/code={code}")
     public void deleteNew(@PathVariable("code") String code) {
         iOderService.delete(code);
+    }
+
+    @PostMapping("/find-By-Date-Success")
+    public List<Float> getByDateSuccess(@RequestBody DashboardVM dashboardVM) {
+        return iOderService.findByDateSuccess(dashboardVM.getStartDate(),dashboardVM.getEndDate());
+    }
+
+    @PostMapping("/find-By-Date-Fall")
+    public List<Float> getByDateFall(@RequestBody DashboardVM dashboardVM) {
+        return iOderService.findByDateFall(dashboardVM.getStartDate(),dashboardVM.getEndDate());
+    }
+
+    @PostMapping("/find-By-Total-Order")
+    public List<Integer> getByTotalOrder(@RequestBody DashboardVM dashboardVM) {
+        return iOderService.getStatisticOrder(dashboardVM.getStartDate(),dashboardVM.getEndDate());
     }
 }

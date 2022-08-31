@@ -1,11 +1,11 @@
 package com.example.happiewatch.service;
 
-import com.example.happiewatch.dto.ItemDto;
 import com.example.happiewatch.entity.DetailEntity;
-import com.example.happiewatch.entity.ItemEntity;
 import com.example.happiewatch.repository.DetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DetailService implements IDetailsService{
@@ -26,14 +26,18 @@ public class DetailService implements IDetailsService{
 
     @Override
     public DetailEntity getItemId(long id){
-        DetailEntity detail= detailRepository.findOneById(id);
-        return detail;
+        return detailRepository.findOneById(id);
     }
 
     @Override
     public void delete(long id) {
         DetailEntity detail=detailRepository.findOneById(id);
         detailRepository.delete(detail);
+    }
+
+    @Override
+    public List<DetailEntity> getAll() {
+       return (List<DetailEntity>) detailRepository.findAll();
     }
 
 
