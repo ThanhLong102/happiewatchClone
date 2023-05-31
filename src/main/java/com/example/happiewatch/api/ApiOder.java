@@ -30,6 +30,11 @@ public class ApiOder {
         return iOderService.display();
     }
 
+    @GetMapping(value = "/show-by-customerId/customerId={customerId}")
+    public List<OderEntity> getByCustomerId(@PathVariable("customerId") long customerId){
+        return iOderService.getOrderByCustomerId(customerId);
+    }
+
     @DeleteMapping(value = "/delete/code={code}")
     public void deleteNew(@PathVariable("code") String code) {
         iOderService.delete(code);

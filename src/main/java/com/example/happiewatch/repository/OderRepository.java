@@ -17,4 +17,6 @@ public interface OderRepository extends PagingAndSortingRepository<OderEntity,Lo
     @Query(value = "select u from OderEntity u where u.creatDate between :dateFrom and :dateEnd")
     List<OderEntity> findByDate(@Param("dateFrom") Date dateFrom, @Param("dateEnd") Date dateEnd);
 
+    @Query(value = "select u from OderEntity u where u.customer.id = :customerId ")
+    List<OderEntity> findByCustomer(@Param("customerId") long customerId);
 }

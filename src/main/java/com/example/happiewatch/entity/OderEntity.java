@@ -20,7 +20,6 @@ public class OderEntity {
     @Id
     private String code;
 
-    @CreationTimestamp
     private Date creatDate;
 
     private Float cost;
@@ -33,7 +32,6 @@ public class OderEntity {
     @JoinColumn(name="customer_id",referencedColumnName = "id")
     private CustomerEntity customer;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "oder", cascade = CascadeType.ALL)
     private Collection<Oder_ItemEntity> oder_itemEntityCollection;
 

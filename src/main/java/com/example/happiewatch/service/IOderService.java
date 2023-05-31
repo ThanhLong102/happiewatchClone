@@ -20,4 +20,6 @@ public interface IOderService {
     List<Float> findByDateFall(Date form, Date end);
 
     List<Integer> getStatisticOrder(Date form, Date end);
+
+    List<OderEntity> getOrderByCustomerId(long customerId);
 }

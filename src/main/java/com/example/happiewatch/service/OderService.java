@@ -32,19 +32,14 @@ public class OderService implements IOderService {
         oderEntity.setIsPayed(oderDto.getIsPayed());
         oderEntity.setCustomer(customer);
         oderEntity.setIsPayed(oderDto.getIsPayed());
+        oderEntity.setCreatDate(new Date());
         oderRepository.save(oderEntity);
         return oderDto;
     }
 
     @Override
     public OderDto update(OderDto oderDto) {
-        OderEntity oderEntity = new OderEntity();
-        CustomerEntity customer = customerRepository.findOneById(oderDto.getCustomerId());
-        oderEntity.setCode(oderDto.getCode());
-        oderEntity.setCost(oderDto.getCost());
-        oderEntity.setTotal_product(oderDto.getTotal_product());
-        oderEntity.setIsPayed(oderDto.getIsPayed());
-        oderEntity.setCustomer(customer);
+        OderEntity oderEntity = oderRepository.findOneByCode(oderDto.getCode());
         oderEntity.setIsPayed(oderDto.getIsPayed());
         oderRepository.save(oderEntity);
         return oderDto;
@@ -54,12 +49,6 @@ public class OderService implements IOderService {
     @Override
     public List<OderEntity> display() {
         List<OderEntity> oderEntities = (List<OderEntity>) oderRepository.findAll();
-//        List<OderEntity> oderEntitieIsPayed = new ArrayList<>();
-//        for (OderEntity o : oderEntities) {
-//            if (!o.getIsPayed()) {
-//                oderEntitieIsPayed.add(o);
-//            }
-//        }
         return oderEntities;
     }
 
@@ -117,4 +106,8 @@ public class OderService implements IOderService {
         return total;
     }
 
+    @Override
+    public List<OderEntity> getOrderByCustomerId(long customerId) {
+        return oderRepository.findByCustomer(customerId);
+    }
 }
